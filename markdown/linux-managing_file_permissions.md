@@ -1,4 +1,20 @@
 **Research and test what you've learnt on your cloud VM:**
+| Permissions | Numeric mode | Type | Owner | Group | Others |
+| --- | --- | --- | --- | --- | --- |
+| `-rwxr-xr--` | `754` | File | `rwx` | `r-x` | `r--` |
+| `-rw-r--r--` | `644` | File | `rw-` | `r--` | `r--` |
+| `-rw-------` | `600` | File | `rw-` | `---` | `---` |
+| `-r--------` | `400` | File | `r--` | `---` | `---` |
+| `-rwx------` | `700` | File | `rwx` | `---` | `---` |
+| `-rwxr-xr-x` | `755` | File | `rwx` | `r-x` | `r-x` |
+| `-rw-rw-r--` | `664` | File | `rw-` | `rw-` | `r--` |
+| `-rwxrwxrwx` | `777` | File | `rwx` | `rwx` | `rwx` |
+| `drwxr-xr-x` | `755` | Directory | `rwx` | `r-x` | `r-x` |
+| `drwx------` | `700` | Directory | `rwx` | `---` | `---` |
+
+- `-` at the start means a regular file; `d` means a directory.
+- `r` = read, `w` = write, `x` = execute a file or enter/traverse a directory.
+- `-` within a permission group means that permission is absent.
 1. **Does being the owner of a file mean you have full permissions on that file? Explain.**
 
    No. The owner's access depends on the User permission bits: read (`r`), write (`w`), and execute (`x`). The owner can normally change these permissions with `chmod`, even if they currently have read-only access.
