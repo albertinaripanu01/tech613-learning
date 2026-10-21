@@ -1,0 +1,15 @@
+# The same config, with four deliberate problems.
+#
+# It still parses. Every problem is in the *values*, which is the point - a file
+# that loads is not a file you can act on.
+#
+# Your validator should report ALL of them in one run, not one at a time.
+
+app_name: flask-demo
+releases_dir: ~/deploy-project/releases
+deploy_dir: ~/deploy-project/app/current
+backup_dir: ~/deploy-project/app/backup
+app_port: 70000
+health_check_url: localhost:8801/health
+health_check_retries: 0
+health_check_delay_seconds: 2

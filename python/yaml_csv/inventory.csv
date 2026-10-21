@@ -1,0 +1,9 @@
+hostname,ip_address,environment,role,port,status,disk_percent_used,bytes_transferred
+web-01,10.24.1.11,production,web,8801,healthy,41,8419203
+web-02,10.24.1.12,production,web,8801,healthy,38,7733910
+api-01,10.24.2.21,production,api,8802,degraded,88,15220477
+api-02,10.24.2.22,production,api,8802,healthy,52,14098320
+db-01,10.24.3.31,production,database,5432,healthy,73,2044118
+web-01-stg,10.30.1.11,staging,web,8801,healthy,19,402117
+api-01-stg,10.30.2.21,staging,api,8802,down,22,0
+build-01,10.40.9.91,tooling,ci,8803,healthy,94,630885

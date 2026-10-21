@@ -1,0 +1,25 @@
+2026-09-14 05:58:02,114 INFO  [web-01] starting flask-demo v2.4.1 on port 8801
+2026-09-14 05:58:02,880 INFO  [web-01] health endpoint registered at /health
+2026-09-14 06:00:11,204 INFO  [web-01] 10.24.9.40 GET /health 200 4ms
+2026-09-14 06:00:11,991 INFO  [web-02] 10.24.9.40 GET /health 200 6ms
+2026-09-14 06:00:12,330 WARN  [api-01] slow query took 2841ms
+2026-09-14 06:00:12,412 INFO  [api-01] 10.24.9.40 GET /health 200 2844ms
+2026-09-14 06:01:03,007 INFO  [web-01] 198.51.100.17 GET /  200 11ms
+2026-09-14 06:01:03,912 INFO  [web-01] 198.51.100.17 GET /static/app.css 200 3ms
+2026-09-14 06:02:44,158 ERROR [api-01] upstream timeout contacting db-01:5432
+2026-09-14 06:02:44,159 INFO  [api-01] 10.24.9.40 GET /health 500 5002ms
+2026-09-14 06:02:51,700 WARN  [build-01] disk usage 94% on /var/lib/builds
+this line has no timestamp and should not crash your parser
+2026-09-14 06:03:10,442 INFO  [web-02] 203.0.113.88 POST /api/deploy 401 8ms
+2026-09-14 06:03:10,443 WARN  [web-02] rejected unauthenticated deploy from 203.0.113.88
+2026-09-14 06:04:00,001 INFO  [api-01-stg] shutting down, received SIGTERM
+2026-09-14 06:04:00,556 ERROR [api-01-stg] worker did not exit within 10s, terminating
+2026-09-14 06:05:19,873 INFO  [web-01] 198.51.100.17 GET /health 200 4ms
+2026-09-14 06:05:20,004 INFO  [db-01] checkpoint complete, 2044118 bytes written
+2026-09-14 06:06:02,  MALFORMED [??] timestamp truncated by log rotation
+2026-09-14 06:07:41,209 ERROR [api-01] upstream timeout contacting db-01:5432
+2026-09-14 06:07:41,210 INFO  [api-01] 10.24.9.40 GET /health 500 5001ms
+2026-09-14 06:08:15,663 INFO  [web-01] 192.0.2.44 GET /  200 9ms
+2026-09-14 06:08:16,120 INFO  [web-01] 192.0.2.44 GET /favicon.ico 404 2ms
+2026-09-14 06:09:30,918 INFO  [api-02] 10.24.9.40 GET /health 200 7ms
+2026-09-14 06:10:02,447 WARN  [build-01] disk usage 94% on /var/lib/builds

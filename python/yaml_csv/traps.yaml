@@ -1,0 +1,22 @@
+# STRETCH - six of these values do not load as the type they look like.
+#
+# Load this file with yaml.safe_load and print each value with its type.
+# Work out which six are wrong, what each one becomes, and why.
+#
+# Two of the six are genuinely surprising. If a value comes back as a number you
+# did not expect, ask what else that punctuation could mean.
+#
+# Then fix the file by quoting, and check it again.
+#
+# Nothing here is a syntax error. The file parses perfectly. That is the point.
+
+service_name: flask-demo
+app_version: 1.20
+deploy_region: NO
+debug_mode: off
+maintenance_window: 22:30
+release_tag: 0755
+owner_team: platform
+replica_count: 3
+health_path: /health
+notify_on_failure: yes

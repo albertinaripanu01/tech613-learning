@@ -1,0 +1,18 @@
+09:41:58 INFO     deploy.py starting, pid 41791
+09:41:58 INFO     Reading config from deploy.yaml
+09:41:58 INFO     Config validated: deploying v3 to ~/deploy-project/app/current
+09:41:59 INFO     Backed up current release (v2) to app/backup/20260916-094159
+09:42:00 INFO     Stopped previous app (pid 41822)
+09:42:00 DEBUG    Removing app/current
+09:42:00 DEBUG    Copying releases/v3 to app/current
+09:42:01 INFO     Started new app (pid 41903)
+09:42:03 WARNING  Health check attempt 1/5 failed: HTTP 500
+09:42:05 WARNING  Health check attempt 2/5 failed: HTTP 500
+09:42:07 WARNING  Health check attempt 3/5 failed: HTTP 500
+09:42:09 WARNING  Health check attempt 4/5 failed: HTTP 500
+09:42:11 WARNING  Health check attempt 5/5 failed: HTTP 500
+09:42:11 ERROR    Health check failed after 5 attempts, last status HTTP 500
+09:42:11 WARNING  Rolling back to v2
+09:42:11 INFO     Stopped failed app (pid 41903)
+09:42:12 DEBUG    Restoring app/backup/20260916-094159 to app/current
+09:42:13 INFO     Started app from backup (pid 41940)

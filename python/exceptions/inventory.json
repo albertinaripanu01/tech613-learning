@@ -1,0 +1,86 @@
+{
+  "site": "eu-west",
+  "generated_on": "2026-09-14T06:00:00Z",
+  "servers": [
+    {
+      "hostname": "web-01",
+      "ip_address": "10.24.1.11",
+      "environment": "production",
+      "role": "web",
+      "port": 8801,
+      "status": "healthy",
+      "disk_percent_used": 41,
+      "bytes_transferred": 8419203
+    },
+    {
+      "hostname": "web-02",
+      "ip_address": "10.24.1.12",
+      "environment": "production",
+      "role": "web",
+      "port": 8801,
+      "status": "healthy",
+      "disk_percent_used": 38,
+      "bytes_transferred": 7733910
+    },
+    {
+      "hostname": "api-01",
+      "ip_address": "10.24.2.21",
+      "environment": "production",
+      "role": "api",
+      "port": 8802,
+      "status": "degraded",
+      "disk_percent_used": 88,
+      "bytes_transferred": 15220477
+    },
+    {
+      "hostname": "api-02",
+      "ip_address": "10.24.2.22",
+      "environment": "production",
+      "role": "api",
+      "port": 8802,
+      "status": "healthy",
+      "disk_percent_used": 52,
+      "bytes_transferred": 14098320
+    },
+    {
+      "hostname": "db-01",
+      "ip_address": "10.24.3.31",
+      "environment": "production",
+      "role": "database",
+      "port": 5432,
+      "status": "healthy",
+      "disk_percent_used": 73,
+      "bytes_transferred": 2044118
+    },
+    {
+      "hostname": "web-01-stg",
+      "ip_address": "10.30.1.11",
+      "environment": "staging",
+      "role": "web",
+      "port": 8801,
+      "status": "healthy",
+      "disk_percent_used": 19,
+      "bytes_transferred": 402117
+    },
+    {
+      "hostname": "api-01-stg",
+      "ip_address": "10.30.2.21",
+      "environment": "staging",
+      "role": "api",
+      "port": 8802,
+      "status": "down",
+      "disk_percent_used": 22,
+      "bytes_transferred": 0
+    },
+    {
+      "hostname": "build-01",
+      "ip_address": "10.40.9.91",
+      "environment": "tooling",
+      "role": "ci",
+      "port": 8803,
+      "status": "healthy",
+      "disk_percent_used": 94,
+      "bytes_transferred": 630885
+    }
+  ]
+}
