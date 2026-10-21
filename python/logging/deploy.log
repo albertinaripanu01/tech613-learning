@@ -1,0 +1,57 @@
+23:30:00 DEBUG    deploy Copying releases/v3 to app/current
+23:30:00 INFO     deploy Config validated: deploying v3 to ~/app/current
+23:30:00 INFO     deploy Backed up current release (v2)
+23:30:00 INFO     deploy Stopped previous app (pid 41822)
+23:30:00 WARNING  deploy Health check attempt 1/5 failed: HTTP 500
+23:30:00 WARNING  deploy Health check attempt 2/5 failed: HTTP 500
+23:30:00 WARNING  deploy Health check attempt 3/5 failed: HTTP 500
+23:30:00 WARNING  deploy Health check attempt 4/5 failed: HTTP 500
+23:30:00 WARNING  deploy Health check attempt 5/5 failed: HTTP 500
+23:30:00 ERROR    deploy Health check failed after 5 attempts
+23:30:00 WARNING  deploy Rolling back to v2...
+23:30:00 INFO     deploy Rollback health check passed. Service restored on v2.
+23:30:00 ERROR    deploy Could not read the port from config
+Traceback (most recent call last):
+  File "E:\SPARTAGLOBAL\tech613-learning\python\logging\codealong_logging.py", line 65, in <module>
+    int("not-a-port")
+    ~~~^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'not-a-port'
+23:30:00 ERROR    deploy Could not read the port: invalid literal for int() with base 10: 'not-a-port'
+23:30:29 DEBUG    deploy Copying releases/v3 to app/current
+23:30:29 INFO     deploy Config validated: deploying v3 to ~/app/current
+23:30:29 INFO     deploy Backed up current release (v2)
+23:30:29 INFO     deploy Stopped previous app (pid 41822)
+23:30:29 WARNING  deploy Health check attempt 1/5 failed: HTTP 500
+23:30:29 WARNING  deploy Health check attempt 2/5 failed: HTTP 500
+23:30:29 WARNING  deploy Health check attempt 3/5 failed: HTTP 500
+23:30:29 WARNING  deploy Health check attempt 4/5 failed: HTTP 500
+23:30:29 WARNING  deploy Health check attempt 5/5 failed: HTTP 500
+23:30:29 ERROR    deploy Health check failed after 5 attempts
+23:30:29 WARNING  deploy Rolling back to v2...
+23:30:29 INFO     deploy Rollback health check passed. Service restored on v2.
+23:30:29 ERROR    deploy Could not read the port from config
+Traceback (most recent call last):
+  File "E:\SPARTAGLOBAL\tech613-learning\python\logging\codealong_logging.py", line 65, in <module>
+    int("not-a-port")
+    ~~~^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'not-a-port'
+23:30:29 ERROR    deploy Could not read the port: invalid literal for int() with base 10: 'not-a-port'
+23:39:25 DEBUG    deploy Copying releases/v3 to app/current
+23:39:25 INFO     deploy Config validated: deploying v3 to ~/app/current
+23:39:25 INFO     deploy Backed up current release (v2)
+23:39:25 INFO     deploy Stopped previous app (pid 41822)
+23:39:25 WARNING  deploy Health check attempt 1/5 failed: HTTP 500
+23:39:25 WARNING  deploy Health check attempt 2/5 failed: HTTP 500
+23:39:25 WARNING  deploy Health check attempt 3/5 failed: HTTP 500
+23:39:25 WARNING  deploy Health check attempt 4/5 failed: HTTP 500
+23:39:25 WARNING  deploy Health check attempt 5/5 failed: HTTP 500
+23:39:25 ERROR    deploy Health check failed after 5 attempts
+23:39:25 WARNING  deploy Rolling back to v2...
+23:39:25 INFO     deploy Rollback health check passed. Service restored on v2.
+23:39:25 ERROR    deploy Could not read the port from config
+Traceback (most recent call last):
+  File "E:\SPARTAGLOBAL\tech613-learning\python\logging\codealong_logging.py", line 65, in <module>
+    int("not-a-port")
+    ~~~^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'not-a-port'
+23:39:25 ERROR    deploy Could not read the port: invalid literal for int() with base 10: 'not-a-port'

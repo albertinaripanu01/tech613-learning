@@ -1,0 +1,5 @@
+INFO 16
+WARN 4
+ERROR 3
+api-01
+api-01-stg
