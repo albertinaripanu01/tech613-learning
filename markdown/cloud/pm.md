@@ -32,7 +32,7 @@ Browser → HTTP port 80 → Nginx → localhost:3000 → Node.js app
 
 The browser visits `http://<PUBLIC_IP>/` without adding `:3000`. Nginx forwards the request internally. This is proxying rather than a browser redirect.
 
-## 3. Install and inspect Nginx (11:01–12:24)
+## 3. Install and inspect Nginx 
 
 Installation command retained from the draft (Nginx is already installed in the demo):
 
@@ -50,7 +50,7 @@ ls /etc/nginx/sites-available
 
 `sites-available` contains the available site configurations. The demonstration edits `default`.
 
-## 4. Configure the reverse proxy manually (12:24–15:37)
+## 4. Configure the reverse proxy manually 
 
 ```bash
 sudo nano /etc/nginx/sites-available/default
@@ -69,7 +69,8 @@ The trailing slash is visible in the demonstrated configuration. The destination
 
 In Nano, use **Ctrl+O**, then **Enter** to save, and **Ctrl+X** to exit.
 
-![Nginx location block at approximately 14:58](images/nginx-proxy.jpg)
+<img width="820" height="506" alt="image" src="https://github.com/user-attachments/assets/fc7495bc-dc44-4453-a9a6-d2bba7a0be83" />
+
 
 ## 5. Restart Nginx and run the app (15:40–17:09)
 
@@ -81,7 +82,8 @@ npm start
 
 The demonstration then opens the server public IP in a browser without a port suffix and reaches the app. The app must be running for Nginx to forward requests successfully.
 
-![Command history and application startup around 16:17](images/nginx-restart-app.jpg)
+<img width="846" height="577" alt="image" src="https://github.com/user-attachments/assets/a4d02b66-d5d7-4397-a162-8a1de6781c16" />
+
 
 ## 6. Automate the edit with sed (17:13–25:13)
 
@@ -102,7 +104,7 @@ sudo sed -i "s/try_files \$uri \$uri\/ =404;/proxy_pass http:\/\/localhost:3000\
 - With double quotes, `\$` protects the literal dollar sign from shell expansion.
 - `\/` escapes slashes used inside a slash-delimited expression.
 
-At 24:00–25:11, a pipe delimiter is discussed as an easier equivalent. Written with single quotes to preserve literal dollar signs:
+At 24:00–25:11:
 
 ```bash
 sudo sed -i 's|try_files $uri $uri/ =404;|proxy_pass http://localhost:3000/;|' /etc/nginx/sites-available/default
@@ -110,7 +112,8 @@ sudo sed -i 's|try_files $uri $uri/ =404;|proxy_pass http://localhost:3000/;|' /
 
 Use one replacement approach. These expressions expect the original text to match; inspect the file if nothing changes. If the old line was already commented out during the manual exercise, start from the original configuration when testing the automated replacement.
 
-![Completed sed example around 23:27](images/sed-automation.jpg)
+<img width="1183" height="607" alt="image" src="https://github.com/user-attachments/assets/80672826-e812-47c0-8468-e4736dda3f18" />
+
 
 Other commands discussed, rather than demonstrated with a specific filename (18:15–18:50):
 
@@ -135,8 +138,6 @@ touch <file>
 ```
 
 The script should retrieve the app code, install its dependencies, configure Nginx as a reverse proxy, and start the application. The recording does not supply a complete provisioning script or a repository URL here, so those missing commands are not invented in these notes.
-
-![EC2 user data field around 28:30](images/ec2-user-data.jpg)
 
 The goal is a fresh instance that deploys the app at first boot and serves it at its public IP without manual SSH setup. Document fixes needed to make the script repeatable. Amazon Machine Images are mentioned as the next topic (34:40–35:18).
 
