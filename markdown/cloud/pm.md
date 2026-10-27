@@ -1,7 +1,5 @@
 # PM2, Nginx reverse proxy and EC2 user data
 
-Notes from **Week 4 – Main call**, 22 October 2026, afternoon recording (`133320`, 36:18). Commands below use normal shell spelling; the automatic transcript contains recognition errors.
-
 ## 1. Start the application
 
 Commands retained from the existing draft:
