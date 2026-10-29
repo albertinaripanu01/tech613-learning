@@ -1,18 +1,18 @@
 # What Is Cloud Computing?
 
-**Answer:the delivery of computing services—including storage, servers, databases, and software—over the internet instead of using your own computer's hard drive or a local physical server.**
+**The delivery of computing services—including storage, servers, databases, and software—over the internet instead of using your own computer's hard drive or a local physical server.**
 
 
 ## On-Premises vs Cloud
 
 ### What is considered on-premises infrastructure?
 
-**Answer:all the computer hardware and software that a company owns, runs, and keeps physically inside its own office building or local data center. Instead of renting space on remote cloud services like Google Cloud or Amazon Web Services, the business manages everything itself.**
+**All the computer hardware and software that a company owns, runs, and keeps physically inside its own office building or local data center. Instead of renting space on remote cloud services like Google Cloud or Amazon Web Services, the business manages everything itself.**
 
 
 ### What is considered cloud infrastructure?
 
-**Answer:Cloud infrastructure refers to the physical and virtual building blocks—such as servers, data storage, networking equipment, and virtualization software—rented from a provider over the internet so you do not need to buy or run them yourself.**
+**Cloud infrastructure refers to the physical and virtual building blocks—such as servers, data storage, networking equipment, and virtualization software—rented from a provider over the internet so you do not need to buy or run them yourself.**
 
 
 ### How do they differ?
@@ -31,7 +31,7 @@
 
 ### What are the four main cloud deployment models?
 
-**Answer:
+**
 1. Public Cloud (The Public Bus):A giant company like Google or Amazon owns the system, and you rent space on it over the internet.
 2. Private Cloud (The Personal Car):The computer system is built exclusively for one company. No outsiders are allowed
 3. Hybrid Cloud (The Train + Taxi combo):You connect a public cloud and a private cloud together.
