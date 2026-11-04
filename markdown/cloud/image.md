@@ -276,3 +276,18 @@ pm2 start index.js --name tic
 ```
 
 Open the new instance's public IP address in your browser to view the Tic Tac Toe app.
+<img width="1292" height="702" alt="image" src="https://github.com/user-attachments/assets/54756bef-df4a-45f6-b5ef-5183245b6716" />
+
+### Why is this useful?
+
+Imagine a company has a website running on one server, and suddenly thousands of people start visiting.
+
+The company may need additional servers.
+
+Without an image, someone would have to install and configure everything on every new server.
+
+With an image, the company can create new servers using a prepared starting point.
+
+**Think of an AMI as a template of a furnished house.** Instead of buying an empty house and arranging the furniture again, you create another house with the same furniture already inside.
+
+**Important:** An AMI copies the machine's disk setup, not its live running memory. So some programs may still need to be started when the new server boots.
