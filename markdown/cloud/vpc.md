@@ -97,6 +97,8 @@ Select **tech603-ramon-ttt-test-app-ready-to-run**, then click **Launch instance
 Name: tec613-albertina-2tier-first-vpc-ttt-app-vm
 
 ![App instance settings](https://github.com/user-attachments/assets/6907824d-69f9-4464-acc2-288a7c7b56ed)
+<img width="832" height="342" alt="image" src="https://github.com/user-attachments/assets/14a658bc-4cd4-4594-9e1a-ac38832fdbc9" />
+
 
 ![App instance settings](https://github.com/user-attachments/assets/95b710cd-5f86-47fd-9dfd-fd16318a1ec9)
 
