@@ -100,8 +100,6 @@ Name: tec613-albertina-2tier-first-vpc-ttt-app-vm
 <img width="832" height="342" alt="image" src="https://github.com/user-attachments/assets/14a658bc-4cd4-4594-9e1a-ac38832fdbc9" />
 
 
-![App instance settings](https://github.com/user-attachments/assets/95b710cd-5f86-47fd-9dfd-fd16318a1ec9)
-
 Security group name — required:
 
 tech613-albertina-2tier-first-vpc-ttt-db-allow-ssh-http
