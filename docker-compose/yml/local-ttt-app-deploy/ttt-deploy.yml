@@ -1,0 +1,23 @@
+# YAML is case sensitive
+# use spaces not a tab
+apiVersion: apps/v1  # specify api to use for deployment
+kind: Deployment
+metadata:
+  name: ttt-deployment  # name the deployment
+  labels:
+    app: ttt-app
+spec:
+  selector:
+    matchLabels:
+      app: ttt-app
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: ttt-app
+    spec:
+      containers:
+        - name: ttt-app
+          image: albertina1310/tech610-tttapp:1.2.0
+          ports:
+            - containerPort: 3000
