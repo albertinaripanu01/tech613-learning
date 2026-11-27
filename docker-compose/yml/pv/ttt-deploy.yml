@@ -1,0 +1,71 @@
+# Local single-node lab volume. The 1Gi capacity is not a hostPath disk quota.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ttt-mongo-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual
+  hostPath:
+    path: /var/lib/ttt-mongo-pv
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ttt-mongo-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ttt-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ttt-app
+  template:
+    metadata:
+      labels:
+        app: ttt-app
+    spec:
+      containers:
+        - name: ttt-app
+          image: albertina1310/tech610-tttapp:1.2.0
+          env:
+            - name: MONGODB_URI
+              value: mongodb://ttt-mongo:27017/posts
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ttt-mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ttt-mongo
+  template:
+    metadata:
+      labels:
+        app: ttt-mongo
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:8.0
+          volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
+      volumes:
+        - name: mongo-data
+          persistentVolumeClaim:
+            claimName: ttt-mongo-pvc

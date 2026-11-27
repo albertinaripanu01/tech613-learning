@@ -2,15 +2,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx-svc
-  namespace: default
 spec:
-  ports:
-    - nodePort: 30001 # range is 30000-32768
-      port: 80
-      targetPort: 80
-
+  type: NodePort
   selector:
-    app: nginx # this label connects this service to the deployment
-
-  type: NodePort # also use LoadBalancer for local use
-                # Cluster IP
+    app: nginx
+  ports:
+    - port: 80

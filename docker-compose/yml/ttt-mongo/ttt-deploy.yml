@@ -1,11 +1,7 @@
-# YAML is case sensitive
-# use spaces not a tab
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ttt-deployment
-  labels:
-    app: ttt-app
 spec:
   replicas: 3
   selector:
@@ -19,8 +15,6 @@ spec:
       containers:
         - name: ttt-app
           image: albertina1310/tech610-tttapp:1.2.0
-          ports:
-            - containerPort: 3000
           env:
             - name: MONGODB_URI
               value: mongodb://ttt-mongo:27017/posts
@@ -29,8 +23,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ttt-mongo
-  labels:
-    app: ttt-mongo
 spec:
   replicas: 1
   selector:
@@ -44,5 +36,3 @@ spec:
       containers:
         - name: mongodb
           image: mongo:8.0
-          ports:
-            - containerPort: 27017

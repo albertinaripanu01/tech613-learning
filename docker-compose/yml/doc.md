@@ -1,163 +1,101 @@
-# TTT Kubernetes deployments
+# Kubernetes deployment exercises
 
-The two folders contain separate versions of the deployment. Run the same two commands from the folder for the version you want:
+Run each command from the folder named for its exercise. The YAML files contain the full resource definitions; this document explains the important settings and the fields removed to simplify them.
+
+## 1. Nginx
+
+Folder: `yml` — [`nginx-deploy.yml`](nginx-deploy.yml), [`nginx-service.yml`](nginx-service.yml)
+
+The Deployment runs three Nginx pods. The Service exposes port 80 through NodePort. The fixed `nodePort` and `targetPort` were removed: Kubernetes assigns a NodePort, and targetPort defaults to the Service port.
 
 ```powershell
-kubectl apply -f ttt-deploy].yml
+kubectl apply -f nginx-deploy.yml
+kubectl apply -f nginx-service.yml
+kubectl get service nginx-svc
+```
+
+**Verified:** Deployment ready at 3/3; the Service currently has NodePort 30001.
+
+## 2. TTT app only
+
+Folder: [`local-ttt-app-deploy`](local-ttt-app-deploy) — [`ttt-deploy.yml`](local-ttt-app-deploy/ttt-deploy.yml), [`ttt-service.yml`](local-ttt-app-deploy/ttt-service.yml)
+
+The app Deployment runs three replicas of `albertina1310/tech610-tttapp:1.2.0`. The NodePort Service uses port 3000. Kubernetes assigns the NodePort automatically, so use `kubectl get service ttt-service` to find the current outside port.
+
+`containerPort` was removed because it only documents a container port; it does not publish the port. `targetPort` was removed because it defaults to the Service port (3000). Default namespace and resource metadata labels were also omitted; the pod labels and matching selectors stay because they connect the Deployment and Service to the app pods.
+
+```powershell
+kubectl apply -f ttt-deploy.yml
 kubectl apply -f ttt-service.yml
+kubectl get service ttt-service
 ```
 
-The first command applies the Deployment YAML; the second applies the Service YAML. The first filename above is copied exactly as typed. The file in the folders is named `ttt-deploy.yml` without `]`.
+**Verified:** Deployment ready at 3/3; the current NodePort is 31770.
 
-## 1. TTT app only
+## 3. TTT app with MongoDB, without persistent storage
 
-Folder: `yml\local-ttt-app-deploy`
+Folder: [`ttt-mongo`](ttt-mongo) — [`ttt-deploy.yml`](ttt-mongo/ttt-deploy.yml), [`ttt-service.yml`](ttt-mongo/ttt-service.yml)
 
-### `ttt-deploy.yml`
+The app runs three replicas and MongoDB runs one. The app's `MONGODB_URI` points to `mongodb://ttt-mongo:27017/posts`; `ttt-mongo` is the database Service name. The app Service is NodePort. MongoDB's Service omits `type` because ClusterIP is the default, so the database remains internal.
 
-```yaml
-# YAML is case sensitive
-# use spaces not a tab
-apiVersion: apps/v1  # specify api to use for deployment
-kind: Deployment
-metadata:
-  name: ttt-deployment  # name the deployment
-  labels:
-    app: ttt-app
-spec:
-  selector:
-    matchLabels:
-      app: ttt-app
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: ttt-app
-    spec:
-      containers:
-        - name: ttt-app
-          image: albertina1310/tech610-tttapp:1.2.0
-          ports:
-            - containerPort: 3000
+The container port declarations and Service targetPorts were removed; the Service ports (3000 and 27017) are sufficient because each target uses that same port. The NodePort is assigned automatically.
+
+```powershell
+kubectl apply -f ttt-deploy.yml
+kubectl apply -f ttt-service.yml
+kubectl get service ttt-service ttt-mongo
 ```
 
-`replicas: 3` creates three app pods. The same `app: ttt-app` label on the pods and selector lets the Service find them. The image is your Docker Hub image, and it listens on port 3000.
+**Verified:** TTT ready at 3/3 and MongoDB at 1/1. The app Service received NodePort 31770; the MongoDB Service remained ClusterIP.
 
-### `ttt-service.yml`
+## 4. TTT app with MongoDB persistence (PV and PVC)
 
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: ttt-service
-  namespace: default
-spec:
-  ports:
-    - nodePort: 30002
-      port: 3000
-      targetPort: 3000
-  selector:
-    app: ttt-app
-  type: NodePort
+Folder: [`pv`](pv) — [`ttt-deploy.yml`](pv/ttt-deploy.yml), [`ttt-service.yml`](pv/ttt-service.yml)
+
+```mermaid
+flowchart LR
+  Browser[Browser] -->|NodePort assigned by Kubernetes| AppService[ttt-service]
+  AppService -->|port 3000| App[TTT app Deployment\n3 replicas]
+  App -->|MONGODB_URI: mongodb://ttt-mongo:27017/posts| MongoService[ttt-mongo Service\nClusterIP]
+  MongoService --> Mongo[MongoDB Deployment\n1 replica]
+  Mongo -->|mountPath /data/db| PVC[ttt-mongo-pvc\n1Gi, ReadWriteOnce]
+  PVC -->|bound to| PV[ttt-mongo-pv\n1Gi hostPath]
 ```
 
-`NodePort` exposes the app outside the cluster on 30002. Service port 3000 forwards to container port 3000; the selector routes traffic to the three TTT pods.
+The YAML defines a 1Gi static PV, a PVC, three app replicas, and one MongoDB replica. MongoDB mounts the claim at `/data/db`, where it stores database files. The PVC matches the PV through `storageClassName: manual`, access mode, and capacity; Kubernetes bound it without an explicit `volumeName`. The default Filesystem volume mode is implicit.
 
-`Browser → NodePort 30002 → 3 TTT app pods`
+The hostPath is `/var/lib/ttt-mongo-pv`. `hostPath.type` was removed, so this directory must already exist on the Docker Desktop node. The PV reported a `Retain` reclaim policy without that field in the YAML. The 1Gi value is the PV/PVC capacity declaration; hostPath does not enforce a disk quota.
 
-## 2. TTT app with MongoDB
-
-Folder: `yml\ttt-mongo`
-
-Use the same two commands above from this folder. Here `ttt-deploy.yml` contains both Deployments, and `ttt-service.yml` contains both Services.
-
-### `ttt-deploy.yml`
-
-```yaml
-# YAML is case sensitive
-# use spaces not a tab
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: ttt-deployment
-  labels:
-    app: ttt-app
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: ttt-app
-  template:
-    metadata:
-      labels:
-        app: ttt-app
-    spec:
-      containers:
-        - name: ttt-app
-          image: albertina1310/tech610-tttapp:1.2.0
-          ports:
-            - containerPort: 3000
-          env:
-            - name: MONGODB_URI
-              value: mongodb://ttt-mongo:27017/posts
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: ttt-mongo
-  labels:
-    app: ttt-mongo
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: ttt-mongo
-  template:
-    metadata:
-      labels:
-        app: ttt-mongo
-    spec:
-      containers:
-        - name: mongodb
-          image: mongo:8.0
-          ports:
-            - containerPort: 27017
+```powershell
+kubectl apply -f ttt-deploy.yml
+kubectl apply -f ttt-service.yml
+kubectl get pv
+kubectl get pvc
+kubectl get service ttt-service
 ```
 
-The app Deployment still runs three pods. `MONGODB_URI` is the environment variable this image reads to connect to MongoDB. `ttt-mongo` is the database Service's cluster DNS name. The second Deployment runs one MongoDB pod using `mongo:8.0` on port 27017.
+To verify data survives a MongoDB pod restart:
 
-### `ttt-service.yml`
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: ttt-service
-  namespace: default
-spec:
-  type: NodePort
-  selector:
-    app: ttt-app
-  ports:
-    - nodePort: 30003
-      port: 3000
-      targetPort: 3000
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ttt-mongo
-  namespace: default
-spec:
-  type: ClusterIP
-  selector:
-    app: ttt-mongo
-  ports:
-    - port: 27017
-      targetPort: 27017
+```powershell
+kubectl delete pod -l app=ttt-mongo
+kubectl get pods -l app=ttt-mongo
 ```
 
-The app remains reachable through NodePort 30003. MongoDB uses an internal `ClusterIP` Service on port 27017, so the app can reach it by `ttt-mongo` inside the cluster.
+**Verified:** app ready at 3/3, MongoDB ready at 1/1, PV and PVC `Bound`, and NodePort 31770. After deleting and recreating the MongoDB pod, the scoreboard still showed `TST 100` at `http://localhost:31770`.
 
-`Browser → NodePort 30003 → 3 TTT app pods → ttt-mongo:27017 → 1 MongoDB pod`
+## Simplifications and tradeoffs
 
+The current namespace is used instead of writing `namespace: default`. Metadata labels were removed, while the pod labels and selectors that connect resources were kept. Fixed NodePorts were removed, so always check the Service for its assigned port. Container `ports` and Service `targetPort` entries were removed because they are unnecessary when the Service port already matches the app's listening port. The default ClusterIP type and default PV filesystem mode are implicit. The optional `Recreate` strategy was removed; Kubernetes now uses its default rolling update strategy. If later updating the MongoDB Deployment with the PVC attached, `Recreate` can prevent overlapping MongoDB pods from trying to use the same ReadWriteOnce volume.
+
+## Cleanup after the PV exercise
+
+From the `pv` folder, remove the Services, Deployments, PVC, and PV object:
+
+```powershell
+kubectl delete -f ttt-service.yml
+kubectl delete deployment ttt-deployment ttt-mongo
+kubectl delete pvc ttt-mongo-pvc
+kubectl delete pv ttt-mongo-pv
+```
+
+The PV reported `Retain` in this cluster. Deleting the Kubernetes PV object does not erase the hostPath files under `/var/lib/ttt-mongo-pv`.
