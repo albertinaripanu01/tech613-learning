@@ -83,9 +83,6 @@ kubectl get pods -l app=ttt-mongo
 
 **Verified:** app ready at 3/3, MongoDB ready at 1/1, PV and PVC `Bound`, and NodePort 31770. After deleting and recreating the MongoDB pod, the scoreboard still showed `TST 100` at `http://localhost:31770`.
 
-## Simplifications and tradeoffs
-
-The current namespace is used instead of writing `namespace: default`. Metadata labels were removed, while the pod labels and selectors that connect resources were kept. Fixed NodePorts were removed, so always check the Service for its assigned port. Container `ports` and Service `targetPort` entries were removed because they are unnecessary when the Service port already matches the app's listening port. The default ClusterIP type and default PV filesystem mode are implicit. The optional `Recreate` strategy was removed; Kubernetes now uses its default rolling update strategy. If later updating the MongoDB Deployment with the PVC attached, `Recreate` can prevent overlapping MongoDB pods from trying to use the same ReadWriteOnce volume.
 
 ## Cleanup after the PV exercise
 
