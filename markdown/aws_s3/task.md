@@ -242,3 +242,62 @@ python3 -c "import boto3; print(boto3.__version__)"
 This imports Boto3 and prints its installed version. Boto3 automatically uses the credentials configured by `aws configure`.
 
 <img width="745" height="48" alt="image" src="https://github.com/user-attachments/assets/7615754c-7f53-4b4b-b1dc-df51440b2f39" />
+
+# Create and Run `01_list_buckets.py`
+
+## 1. Move into your scripts folder
+
+```bash
+mkdir -p boto3-s3-scripts
+cd boto3-s3-scripts
+```
+
+`mkdir -p` creates the folder only if it does not already exist. `cd` moves into that folder.
+
+## 2. Create the Python file
+
+```bash
+nano 01_list_buckets.py
+```
+
+This opens the Nano text editor and creates `01_list_buckets.py`.
+
+## 3. Paste this code into Nano
+
+```python
+import boto3
+
+s3 = boto3.client("s3")
+
+for bucket in s3.list_buckets()["Buckets"]:
+    print(bucket["Name"])
+```
+
+The script creates an S3 client, asks AWS for the buckets available to your configured account, and prints every bucket name.
+
+## 4. Save and exit Nano
+
+1. Press `Ctrl + O` to save the file.
+2. Press `Enter` to confirm the filename.
+3. Press `Ctrl + X` to exit Nano.
+
+## 5. Confirm the file exists
+
+```bash
+ls
+```
+
+You should see:
+
+```text
+01_list_buckets.py
+```
+
+## 6. Run the script
+
+```bash
+python3 01_list_buckets.py
+```
+
+If AWS CLI authentication was configured with `aws configure`, Boto3 uses the same credentials. The command prints your S3 bucket names.
+
