@@ -8,12 +8,6 @@ This guide shows how to install the AWS CLI on an Ubuntu x64 EC2 instance, authe
 
 SSH into the new EC2 instance:
 
-```bash
-ssh -i "path/to/key.pem" ubuntu@YOUR_PUBLIC_IP
-```
-
-Replace `path/to/key.pem` with the location of your private key and `YOUR_PUBLIC_IP` with the instance's public IPv4 address.
-
 ### 2. Update Ubuntu packages
 
 ```bash
